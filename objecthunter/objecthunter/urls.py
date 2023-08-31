@@ -18,6 +18,7 @@ from django.urls import path, include
 from account.views import landing_page
 
 urlpatterns = [
+    path('', landing_page),
     path("admin/", admin.site.urls),
-    path('', include('account.urls', namespace='account'))
+    path('account/', include('account.urls')),
 ]

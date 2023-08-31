@@ -5,14 +5,18 @@
 {% block content %}
 <section class="text-gray-600 body-font">
     <div class="container mx-auto flex px-5 py-8 items-center justify-center flex-col">
-      <img class="lg:w-2/6 md:w-3/6 w-5/6 object-cover object-center rounded" alt="hero" src="https://dummyimage.com/720x600">
+      <img class="lg:w-1/4 md:w-2/4 w-2/3 object-cover object-center rounded" alt="hero" src="https://cdni.iconscout.com/illustration/premium/thumb/machine-learning-5526142-4618522.png">
       <div class="text-center lg:w-2/3 w-full">
-        <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Management Made Easy</h1>
+        <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Discover. Detect. Share.</h1>
         <p class="mb-8 leading-relaxed">
-            Powered by Django</p>
+            Powered by Django and PyTorch</p>
         <div class="flex justify-center">
+          {% if not request.user.is_authenticated %}
           <a href="#" class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Signup</a>
-          <a href="#" class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">Login</a>
+          <a href="{% url 'login' %}" class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">Login</a> 
+          {%else%}
+          <a href="#" class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Start using the model</a>
+          {% endif %}
         </div>
       </div>
     </div>
