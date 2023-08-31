@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
-from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
+from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm, ProfileRegistrationForm
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Profile
@@ -41,22 +41,25 @@ def dashboard(request):
 def register(request):
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
-        if user_form.is_valid():
+        profile_form = ProfileRegistrationForm(request.POST, request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
             new_user = user_form.save(commit=False)
-            new_user.set_password(
-                user_form.cleaned_data['password'])
+            new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
-            Profile.objects.create(user=new_user)
+            profile = profile_form.save(commit=False)
+            profile.user = new_user
+            profile.save()
             return render(request,
                           'account/register_done.html',
                           {'new_user': new_user})
         
     else:
         user_form = UserRegistrationForm()
+        profile_form = ProfileRegistrationForm()
     
     return render(request,
                     'account/register.html',
-                    {'user_form': user_form})
+                    {'user_form': user_form, 'profile_form':profile_form})
 
 
 @login_required

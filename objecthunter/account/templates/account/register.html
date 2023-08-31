@@ -22,29 +22,29 @@
             {% csrf_token %}
             <h2 class="text-gray-900 text-lg font-medium title-font mb-5 mx-auto">Sign Up</h2>
             <div class="relative mb-4">
-                <label for="full-name" class="leading-7 text-sm text-gray-600">Username</label>
+                <label for="{{user_form.username.id_for_label}}" class="leading-7 text-sm text-gray-600">Username</label>
                 {{user_form.username|add_tailwind_classes:"w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"}}
             </div>
             <div class="relative mb-4">
-                <label for="email" class="leading-7 text-sm text-gray-600">First Name</label>
+                <label for="{{user_form.first_name.id_for_label}}" class="leading-7 text-sm text-gray-600">First Name</label>
                 {{user_form.first_name|add_tailwind_classes:"w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"}}
             </div>
             <div class="relative mb-4">
-                <label for="email" class="leading-7 text-sm text-gray-600">Email</label>
+                <label for="{{user_form.email.id_for_label}}" class="leading-7 text-sm text-gray-600">Email</label>
                 {{user_form.email|add_tailwind_classes:"w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"}}                
             </div>
             <div class="relative mb-4">
-                <label for="email" class="leading-7 text-sm text-gray-600">Password</label>
+                <label for="{{user_form.password.id_for_label}}" class="leading-7 text-sm text-gray-600">Password</label>
                 {{user_form.password|add_tailwind_classes:"w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"}}                                
             </div>
             <div class="relative mb-4">
-                <label for="email" class="leading-7 text-sm text-gray-600">Repeat Password</label>
+                <label for="{{user_form.password_repeat.id_for_label}}" class="leading-7 text-sm text-gray-600">Repeat Password</label>
                 {{user_form.password_repeat|add_tailwind_classes:"w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"}}                                                
             </div>
             
             <div class="relative mb-4">
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="{{ user_form.photo.id_for_label }}">Upload Profile Photo</label>
-                {{ user_form.photo|add_tailwind_classes:"block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" }}
+                <label class="leading-7 text-sm text-gray-600" for="{{ user_form.photo.id_for_label }}">Upload Profile Photo</label>
+                {{ profile_form.photo|add_tailwind_classes:"block w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 px-3 leading-8 transition-colors duration-200 ease-in-out" }}
             </div>
 
             <input type="submit" value="Create my account" class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"></button>

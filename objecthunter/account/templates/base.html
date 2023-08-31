@@ -41,8 +41,11 @@
                         <path d="M5 12h14M12 5l7 7-7 7"></path>
                     </svg>
                 </a>
-                <p class="mr-1 hover:text-gray-500">Logged in as</p>
-                <a href="#" class="mr-5 hover:text-black font-bold">{{request.user.username}}</a>
+                {% comment %} <p class="mr-1 hover:text-gray-500">Logged in as</p> {% endcomment %}
+                <a href="#" class="flex items-center">
+                    <span class="text-lg hover:text-black font-semibold mr-3">{{ request.user.username }}</span>
+                    <img src="{{ request.user.profile.photo.url }}" alt="User Photo" class="w-8 h-8 rounded-full mr-2">
+                </a>
             </nav>
             {% endif %}
             
