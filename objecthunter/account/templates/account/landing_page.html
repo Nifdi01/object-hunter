@@ -101,9 +101,8 @@
         <a href="{% url 'login' %}"
           class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">Login</a>
         {%else%}
-        <a href="#"
-          class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Start
-          using the model</a>
+        <a href="{% url 'model_list' %}"
+          class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Explore Models</a>
         {% endif %}
       </div>
     </div>
