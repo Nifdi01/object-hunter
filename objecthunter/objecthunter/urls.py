@@ -23,6 +23,7 @@ urlpatterns = [
     path('', landing_page),
     path("admin/", admin.site.urls),
     path('account/', include('account.urls')),
+    path('models/', include('models.urls')),
 ]
 
 if settings.DEBUG:
