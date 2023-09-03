@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 {% block title %}Models{% endblock title %}
+{% load static %}
 
 {% block content %}
-<div class='container text-center mt-5'>
-    <div class="inline-block px-4 border-b-4 border-indigo-500 rounded-sm">
+<div class="container text-center mt-5">
+    <div class="inline-block px-1 border-b-4 border-indigo-500 rounded-sm">
         <h1 class="title-font sm:text-4xl text-3xl pb-5 font-medium text-gray-900">Object Detection Models</h1>
     </div>
 </div>
@@ -13,7 +14,9 @@
             <div class="p-4 lg:w-1/2 md:w-full">
                 <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col">
                     <a href='#' class="group transition ease-in-out delay-150 duration-200 w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0 hover:bg-indigo-500 hover:text-white">
-                        <svg class='transition ease-in-out delay-150 duration-200 stroke-inherit group-hover:fill-white fill-indigo-500' stroke-linecap="round" width="40" height="40" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <svg class='transition ease-in-out delay-150 duration-200 stroke-inherit group-hover:fill-white fill-indigo-500'
+                            stroke-linecap="round" width="40" height="40" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M2 17h1v5h5v1H2zm21 0h-1v5h-5v1h6zM3 3h5V2H2v6h1zm20-1h-6v1h5v5h1zm-9.75 12h-1.5a.75.75 0 0 1-.75-.75v-1.5a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-.75.75zM13 12h-1v1h1zm7 0h-5v1h5zm-10 0H5v1h5zm3 8v-5h-1v5zm-1-10h1V5h-1z" />
                             <path fill="none" d="M0 0h24v24H0z" />
@@ -23,7 +26,8 @@
                         <h2 class="text-gray-900 text-lg title-font font-medium mb-3">YOLOv1</h2>
                         <p class="leading-relaxed text-base">YOLOv1 is a single-stage object detection model that
                             predicts bounding boxes and class probabilities in a single pass.</p>
-                        <a href='#' class="transition ease-in-out delay-150 hover:scale-110 mt-3 text-indigo-500 inline-flex items-center hover:text-indigo-800 duration-200">Learn More
+                        <a href='#' class="transition ease-in-out delay-150 hover:scale-110 mt-3 text-indigo-500 inline-flex items-center hover:text-indigo-800 duration-200">Learn
+                            More
                             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
                                 <path d="M5 12h14M12 5l7 7-7 7"></path>
@@ -35,8 +39,9 @@
             <div class="p-4 lg:w-1/2 md:w-full">
                 <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col">
                     <a href="#" class="group transition ease-in-out delay-150 duration-200 hover:bg-red-500 w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-red-100 text-indigo-500 flex-shrink-0">
-                        <svg class='transition ease-in-out delay-150 duration-200 stroke-inherit group-hover:fill-white fill-red-500' stroke-linecap="round" width="40" height="40"
-                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <svg class='transition ease-in-out delay-150 duration-200 stroke-inherit group-hover:fill-white fill-red-500'
+                            stroke-linecap="round" width="40" height="40" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M2 17h1v5h5v1H2zm21 0h-1v5h-5v1h6zM3 3h5V2H2v6h1zm20-1h-6v1h5v5h1zm-9.75 12h-1.5a.75.75 0 0 1-.75-.75v-1.5a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-.75.75zM13 12h-1v1h1zm7 0h-5v1h5zm-10 0H5v1h5zm3 8v-5h-1v5zm-1-10h1V5h-1z" />
                             <path fill="none" d="M0 0h24v24H0z" />
@@ -44,8 +49,10 @@
                     </a>
                     <div class="flex-grow">
                         <h2 class="text-gray-900 text-lg title-font font-medium mb-3">YOLOv3</h2>
-                        <p  class="leading-relaxed text-base">YOLOv3 is a single-stage object detection model that uses FPN, anchor boxes, and Darknet-53 to improve accuracy and speed.</p>
-                        <a href='#' class="transition ease-in-out delay-150 hover:scale-110 mt-3 text-indigo-500 inline-flex items-center hover:text-indigo-800 duration-200">Learn More
+                        <p class="leading-relaxed text-base">YOLOv3 is a single-stage object detection model that uses
+                            FPN, anchor boxes, and Darknet-53 to improve accuracy and speed.</p>
+                        <a href='#' class="transition ease-in-out delay-150 hover:scale-110 mt-3 text-indigo-500 inline-flex items-center hover:text-indigo-800 duration-200">Learn
+                            More
                             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
                                 <path d="M5 12h14M12 5l7 7-7 7"></path>
