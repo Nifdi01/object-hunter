@@ -4,3 +4,4 @@ from django.shortcuts import render
 
 def list_models(request):
     return render(request, 'models/model_list.html')
+
