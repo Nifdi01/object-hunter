@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load yolo_filters %}
+
+{% block title %}
+upload
+{% endblock title %}
+
+{% block content %}
+    <h1>Image Upload</h1>
+
+    {% if form.is_valid %}
+        <p>The image has been uploaded successfully.</p>
+        <p>The results of the object detection are:</p>
+        <ul>
+            {% for result in results %}
+                <li>{{ result.label }}: {{ result.confidence }}%</li>
+            {% endfor %}
+        </ul>
+
+        <p>Original Image:</p>
+        <img src="{{ image_path }}" alt="Uploaded Image" width="500">
+
+        <!-- Overlay bounding boxes and labels on the original image -->
+        <div style="position: relative; display: inline-block;">
+            <img src="{{ image_path }}" alt="Annotated Image" width="500" style="position: absolute;">
+            {% for result in results %}
+                <div style="position: absolute; left: {{ result.box.xcenter|multiply:100 }}%; top: {{ result.box.ycenter|multiply:100 }}%;">
+                    <div style="background-color: #007bff; color: #ffffff; padding: 5px;">
+                        {{ result.label }}: {{ result.confidence }}%
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>There was an error uploading the image.</p>
+    {% endif %}
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Upload Image">
+    </form>
+{% endblock content %}
