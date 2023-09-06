@@ -6,26 +6,28 @@ upload
 {% endblock title %}
 
 {% block content %}
-    <h1>Image Upload</h1>
+    <h1 class="text-2xl font-semibold mb-4">Image Upload</h1>
 
     {% if form.is_valid %}
         <p>The image has been uploaded successfully.</p>
-        <p>The results of the object detection are:</p>
-        <ul>
+        <p class="mb-2">The results of the object detection are:</p>
+        <ul class="list-disc pl-6 mb-4">
             {% for result in results %}
                 <li>{{ result.label }}: {{ result.confidence }}%</li>
             {% endfor %}
         </ul>
 
-        <p>Original Image:</p>
-        <img src="{{ image_path }}" alt="Uploaded Image" width="500">
+        <div class="mb-6">
+            <p class="mb-2">Original Image:</p>
+            <img src="{{ image_path }}" alt="Uploaded Image" class="max-w-xl" />
+        </div>
 
         <!-- Overlay bounding boxes and labels on the original image -->
-        <div style="position: relative; display: inline-block;">
-            <img src="{{ image_path }}" alt="Annotated Image" width="500" style="position: absolute;">
+        <div class="relative inline-block">
+            <img src="{{ image_path }}" alt="Annotated Image" class="max-w-xl" />
             {% for result in results %}
-                <div style="position: absolute; left: {{ result.box.xcenter|multiply:100 }}%; top: {{ result.box.ycenter|multiply:100 }}%;">
-                    <div style="background-color: #007bff; color: #ffffff; padding: 5px;">
+                <div class="absolute left-{{ result.box.xcenter|multiply:100 }}% top-{{ result.box.ycenter|multiply:100 }}%">
+                    <div class="bg-blue-500 text-white py-1 px-2 rounded">
                         {{ result.label }}: {{ result.confidence }}%
                     </div>
                 </div>
@@ -35,9 +37,9 @@ upload
         <p>There was an error uploading the image.</p>
     {% endif %}
 
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="" method="post" enctype="multipart/form-data" class="mt-6">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Upload Image">
+        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Upload Image</button>
     </form>
 {% endblock content %}

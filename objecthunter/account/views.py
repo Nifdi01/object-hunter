@@ -38,6 +38,8 @@ def image_upload_view(request):
                 annotated_image_path = os.path.join(fs.location, 'annotated_' + uploaded_image.name)
                 im.save(annotated_image_path)  # Save the annotated image
 
+            os.remove(image_full_path)
+            
             # Construct the URL for the annotated image
             annotated_image_url = os.path.join(settings.MEDIA_URL, 'annotated_' + uploaded_image.name)
 
