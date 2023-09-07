@@ -6,7 +6,7 @@ from ultralytics import YOLO
 from PIL import Image
 from django.conf import settings
 from .forms import ImageUploadForm
-# from .models import ObjectDetectionModel
+from .models import ObjectDetectionModel
 
 def image_upload_view(request):
     if request.method == 'POST':
