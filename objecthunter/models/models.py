@@ -23,7 +23,7 @@ class ObjectDetectionModel(models.Model):
     description = models.TextField()
     model_file = models.FileField(upload_to='models/')
     classes_during_inference = models.ManyToManyField(CategoryLabel, related_name='models_inference', blank=True)
-    category_label = models.OneToOneField(CategoryLabel, on_delete=models.CASCADE, related_name='model', default=1)
+    category_label = models.ForeignKey(CategoryLabel, on_delete=models.CASCADE, related_name='model', default=1)
 
     def __str__(self):
         return self.title

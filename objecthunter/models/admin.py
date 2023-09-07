@@ -13,4 +13,14 @@ class CategoryLabelAdmin(admin.ModelAdmin):
 
 admin.site.register(CategoryLabel, CategoryLabelAdmin)
 
-admin.site.register(ObjectDetectionModel)
+class ObjectDetectionModelAdmin(admin.ModelAdmin):
+    list_display = ('title', 'category_label', 'get_inference_modes')
+
+    def get_inference_modes(self, obj):
+        # Define a method to retrieve and display the inference modes as a comma-separated string
+        return ', '.join([label.label_name for label in obj.classes_during_inference.all()])
+
+    get_inference_modes.short_description = 'Inference Modes'  # Set a custom column header
+
+# Register the admin class for ObjectDetectionModel
+admin.site.register(ObjectDetectionModel, ObjectDetectionModelAdmin)
