@@ -6,40 +6,25 @@ upload
 {% endblock title %}
 
 {% block content %}
-    <h1 class="text-2xl font-semibold mb-4">Image Upload</h1>
+    {% if annotated_image_url %}
+        <h2>Annotated Image:</h2>
+        <img src="{{ annotated_image_url }}" alt="Annotated Image" style="max-width: 100%;">
 
-    {% if form.is_valid %}
-        <p>The image has been uploaded successfully.</p>
-        <p class="mb-2">The results of the object detection are:</p>
-        <ul class="list-disc pl-6 mb-4">
-            {% for result in results %}
-                <li>{{ result.label }}: {{ result.confidence }}%</li>
-            {% endfor %}
-        </ul>
-
-        <div class="mb-6">
-            <p class="mb-2">Original Image:</p>
-            <img src="{{ image_path }}" alt="Uploaded Image" class="max-w-xl" />
-        </div>
-
-        <!-- Overlay bounding boxes and labels on the original image -->
-        <div class="relative inline-block">
-            <img src="{{ image_path }}" alt="Annotated Image" class="max-w-xl" />
-            {% for result in results %}
-                <div class="absolute left-{{ result.box.xcenter|multiply:100 }}% top-{{ result.box.ycenter|multiply:100 }}%">
-                    <div class="bg-blue-500 text-white py-1 px-2 rounded">
-                        {{ result.label }}: {{ result.confidence }}%
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <p>There was an error uploading the image.</p>
+        <!-- You can also display additional information about the detected objects here if needed -->
+        {% for result in results %}
+            <h3>Detected Objects:</h3>
+            <ul>
+                {% for label, confidence, box in result.xyxy %}
+                    <li>{{ label }} (Confidence: {{ confidence|floatformat:"2" }}) - {{ box|join:", "|floatformat:"2" }}</li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
     {% endif %}
 
-    <form action="" method="post" enctype="multipart/form-data" class="mt-6">
+    <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data" class="mt-6">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Upload Image</button>
     </form>
 {% endblock content %}
+
