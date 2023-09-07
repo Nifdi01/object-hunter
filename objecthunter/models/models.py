@@ -1,4 +1,6 @@
 from django.db import models
+import os
+from ultralytics import YOLO
 
 class Image(models.Model):
     image = models.ImageField(upload_to='images', blank=True)
@@ -21,7 +23,7 @@ class ObjectDetectionModel(models.Model):
     description = models.TextField()
     category_labels = models.ManyToManyField(CategoryLabel, related_name='models')
     classes_during_inference = models.ManyToManyField(CategoryLabel, related_name='models_inference', blank=True)
-    # Add other fields as needed, e.g., model_file, created_at, updated_at, etc.
+    model_file = YOLO('objecthunter/media/yolov8n.pt')
 
     def __str__(self):
         return self.title
