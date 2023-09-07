@@ -21,9 +21,9 @@ class CategoryLabel(models.Model):
 class ObjectDetectionModel(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    category_labels = models.ManyToManyField(CategoryLabel, related_name='models')
+    model_file = models.FileField(upload_to='models/')
     classes_during_inference = models.ManyToManyField(CategoryLabel, related_name='models_inference', blank=True)
-    model_file = YOLO('objecthunter/media/yolov8n.pt')
+    category_label = models.OneToOneField(CategoryLabel, on_delete=models.CASCADE, related_name='model', default=1)
 
     def __str__(self):
         return self.title

@@ -6,6 +6,7 @@ from ultralytics import YOLO
 from PIL import Image
 from django.conf import settings
 from .forms import ImageUploadForm
+# from .models import ObjectDetectionModel
 
 def image_upload_view(request):
     if request.method == 'POST':
@@ -49,6 +50,13 @@ def image_upload_view(request):
     # If the request is not a POST, render the form
     return render(request, 'models/upload.html', {'form': ImageUploadForm()})
 
+
+
 def list_models(request):
-    return render(request, 'models/model_list.html')
+    # Retrieve all object detection models from the database
+    models = ObjectDetectionModel.objects.all()
+    context = {
+        'models': models,
+    }
+    return render(request, 'models/model_list.html', context)
 
