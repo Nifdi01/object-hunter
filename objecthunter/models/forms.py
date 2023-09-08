@@ -1,9 +1,8 @@
 from django import forms
-from .models import Image
+from .models import ObjectDetectionModel
 
-class ImageUploadForm(forms.ModelForm):
-    image = forms.ImageField(required=True)
-
-    class Meta:
-        model = Image
-        fields = ['image']
+class ImageUploadForm(forms.Form):
+    image = forms.ImageField()
+    # selected_detector = forms.ModelChoiceField(
+    #     queryset=ObjectDetectionModel.objects.all(), empty_label=None
+    # )
