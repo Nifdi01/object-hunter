@@ -60,6 +60,7 @@ def image_upload_view(request, pk):
                 'image': uploaded_image,
                 'annotated_image_url': annotated_image_url,
                 'selected_detector': object_detection_model,
+                'form': form
             }
             return render(request, 'models/upload.html', context)
 
