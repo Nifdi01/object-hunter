@@ -21,7 +21,7 @@ class CategoryLabel(models.Model):
 class ObjectDetectionModel(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    model_file = models.FileField(upload_to='models/')
+    model_file = models.FileField(upload_to='')
     classes_during_inference = models.ManyToManyField(CategoryLabel, related_name='models_inference', blank=True)
     category_label = models.ForeignKey(CategoryLabel, on_delete=models.CASCADE, related_name='model', default=1)
 

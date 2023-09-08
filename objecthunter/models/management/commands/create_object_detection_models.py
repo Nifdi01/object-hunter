@@ -25,4 +25,3 @@ class Command(BaseCommand):
                 category_label=category_label,
             )
             self.stdout.write(self.style.SUCCESS(f'Successfully created {category_name} Detector model'))
-
