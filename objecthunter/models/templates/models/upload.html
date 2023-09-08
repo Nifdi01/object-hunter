@@ -6,25 +6,18 @@ upload
 {% endblock title %}
 
 {% block content %}
+    <h2>Selected Model: {{ selected_detector.title }}</h2>
+
     {% if annotated_image_url %}
         <h2>Annotated Image:</h2>
         <img src="{{ annotated_image_url }}" alt="Annotated Image" style="max-width: 100%;">
-
-        <!-- You can also display additional information about the detected objects here if needed -->
-        {% for result in results %}
-            <h3>Detected Objects:</h3>
-            <ul>
-                {% for label, confidence, box in result.xyxy %}
-                    <li>{{ label }} (Confidence: {{ confidence|floatformat:"2" }}) - {{ box|join:", "|floatformat:"2" }}</li>
-                {% endfor %}
-            </ul>
-        {% endfor %}
     {% endif %}
 
-    <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data" class="mt-6">
+    <form action="{% url 'image_upload' selected_detector.pk %}" method="post" enctype="multipart/form-data" class="mt-6">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Upload Image</button>
     </form>
 {% endblock content %}
+
 
