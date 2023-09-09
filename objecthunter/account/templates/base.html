@@ -37,30 +37,29 @@
       </a>
       {% else %}
       <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-        <div id="avatarButton" type="button" data-dropdown-toggle="userDropdown"
-        data-dropdown-placement="bottom-start" class=" cursor-pointer flex items-center">
+        <div id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start"
+          class=" cursor-pointer flex items-center">
           <span class="text-lg hover:text-black font-semibold mr-3">{{ request.user.username }}</span>
-          <img src="{{ request.user.profile.photo.url }}" alt="User Photo"
-            class="w-8 h-8 rounded-full mr-4">
+          <img src="{{ request.user.profile.photo.url }}" alt="User Photo" class="w-8 h-8 rounded-full mr-4">
         </div>
-        <div id="userDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-44 border border-slate-100">
+        <div id="userDropdown"
+          class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-44 border border-slate-100">
           <div class="px-4 py-3 text-sm text-gray-900">
             <div>{{request.user.username}}</div>
             <div class="font-medium truncate">{{request.user.email}}</div>
           </div>
           <ul class="py-2 text-sm text-gray-700" aria-labelledby="avatarButton">
             <li>
+
               <a href="{% url 'dashboard' %}"
                 class="block px-4 py-2 hover:bg-gray-100">Dashboard</a>
             </li>
             <li>
-              <a href="#"
-                class="block px-4 py-2 hover:bg-gray-100">Settings</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Settings</a>
             </li>
           </ul>
           <div class="py-1">
-            <a href="{% url 'dashboard' %}"
-              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
+            <a href="{% url 'logout' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
               out</a>
           </div>
         </div>
@@ -73,7 +72,6 @@
         </a>
       </nav>
       {% endif %}
-
     </div>
   </header>
   {% block content %}
