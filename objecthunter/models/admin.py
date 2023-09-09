@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CategoryLabel, ObjectDetectionModel
+from .models import CategoryLabel, ObjectDetectionModel, ModelUseCount
 
 class CategoryLabelAdmin(admin.ModelAdmin):
     list_display = ('label_name', 'get_label_ids')
@@ -24,3 +24,6 @@ class ObjectDetectionModelAdmin(admin.ModelAdmin):
 
 # Register the admin class for ObjectDetectionModel
 admin.site.register(ObjectDetectionModel, ObjectDetectionModelAdmin)
+
+
+admin.site.register(ModelUseCount)

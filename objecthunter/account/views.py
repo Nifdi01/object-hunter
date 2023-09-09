@@ -4,9 +4,8 @@ from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditFor
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Profile
+from models.models import ModelUseCount, ObjectDetectionModel
 from django.contrib import messages
-from django.forms import ModelForm
-from models.models import ObjectDetectionModel
 
 def landing_page(request):
     return render(request, 'account/landing_page.html')
@@ -14,23 +13,8 @@ def landing_page(request):
 
 
 @login_required
-def dashboard_view(request):
-    # Fetch all the ObjectDetectionModel instances
-    models = ObjectDetectionModel.objects.all()
-    
-    # Initialize an empty list to store the use counts
-    use_counts = []
-
-    # Loop through the models and get the use count for each one
-    for model in models:
-        use_count = model.requests.filter(user=request.user).count()
-        use_counts.append(use_count)
-
-    context = {
-        'use_counts': use_counts,
-    }
-
-    return render(request, 'dashboard.html', context)
+def user_dashboard(request):
+    return render(request, 'account/dashboard.html')
 
 
 

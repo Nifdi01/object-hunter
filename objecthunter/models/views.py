@@ -6,11 +6,14 @@ from ultralytics import YOLO
 from PIL import Image
 from django.conf import settings
 from .forms import ImageUploadForm
-from .models import ObjectDetectionModel
-
+from .models import ObjectDetectionModel, CategoryLabel
+from collections import defaultdict
 
 def image_upload_view(request, pk):
     object_detection_model = get_object_or_404(ObjectDetectionModel, pk=pk)
+
+    # Create a dictionary to store the use count for each model
+    model_use_count = defaultdict(int)
 
     if request.method == 'POST':
         form = ImageUploadForm(request.POST, request.FILES)
@@ -26,18 +29,18 @@ def image_upload_view(request, pk):
             # Load the YOLO model associated with the selected detector
             yolo_model = YOLO(os.path.join(settings.MEDIA_ROOT, 'yolov8n.pt'))
 
-
             # Get the related CategoryLabel instance associated with the ObjectDetectionModel
             category_label = object_detection_model.category_label
 
             # Get the IDs of labels associated with the category_label
             class_ids = list(category_label.label_ids.values_list('label_id', flat=True))
-            print(class_ids)
+            
+            # Increment the use count for the current model
+            model_use_count[object_detection_model.title] += 1
+            print(model_use_count)
 
             # Perform object detection using the loaded model and class IDs
             results = yolo_model(image_full_path, classes=class_ids)
-
-
 
             # Process the results and save the annotated image
             for r in results:
@@ -60,12 +63,13 @@ def image_upload_view(request, pk):
                 'image': uploaded_image,
                 'annotated_image_url': annotated_image_url,
                 'selected_detector': object_detection_model,
-                'form': form
+                'form': form,
+                'model_use_count': dict(model_use_count)  # Convert defaultdict to a regular dictionary
             }
             return render(request, 'models/upload.html', context)
 
-    # If the request is not a POST, render the form and pass the selected detector
-    return render(request, 'models/upload.html', {'form': ImageUploadForm(), 'selected_detector': object_detection_model})
+    # If the request is not a POST, render the form and pass the selected detector and model use count
+    return render(request, 'models/upload.html', {'form': ImageUploadForm(), 'selected_detector': object_detection_model, 'model_use_count': dict(model_use_count)})
 
 
 
