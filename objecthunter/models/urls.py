@@ -4,7 +4,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', views.list_models, name='model_list')
+    path('', views.list_models, name='model_list'),
+    path('upload/<int:pk>/', views.image_upload_view, name='image_upload'),
 ]
 
 if settings.DEBUG:
