@@ -9,6 +9,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <title>{% block title %}{% endblock title %}</title>
 </head>
 
@@ -49,7 +50,7 @@
           </div>
           <ul class="py-2 text-sm text-gray-700" aria-labelledby="avatarButton">
             <li>
-              <a href="#"
+              <a href="{% url 'dashboard' %}"
                 class="block px-4 py-2 hover:bg-gray-100">Dashboard</a>
             </li>
             <li>
@@ -58,7 +59,7 @@
             </li>
           </ul>
           <div class="py-1">
-            <a href="{% url 'logout' %}"
+            <a href="{% url 'dashboard' %}"
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
               out</a>
           </div>
