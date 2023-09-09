@@ -8,12 +8,10 @@ from django.conf import settings
 from .forms import ImageUploadForm
 from .models import ObjectDetectionModel, CategoryLabel
 from collections import defaultdict
+from account.models import Profile
 
 def image_upload_view(request, pk):
     object_detection_model = get_object_or_404(ObjectDetectionModel, pk=pk)
-
-    # Create a dictionary to store the use count for each model
-    model_use_count = defaultdict(int)
 
     if request.method == 'POST':
         form = ImageUploadForm(request.POST, request.FILES)
@@ -22,7 +20,24 @@ def image_upload_view(request, pk):
             uploaded_image = form.cleaned_data['image']
             fs = FileSystemStorage()
             image_path = fs.save(uploaded_image.name, uploaded_image)
+            
+            # Increment the usage for the model
+            user_profile = request.user.profile
+            model_use_count = user_profile.model_use_count
 
+            # Get the name of the model associated with the ID
+            model_name = object_detection_model.title  # Assuming "title" is the field containing the model name
+
+            # Check if the model name exists in the model_use_count dictionary
+            if model_name in model_use_count:
+                model_use_count[model_name] += 1
+            else:
+                model_use_count[model_name] = 1
+
+            # Save the updated use count back to the user's profile
+            user_profile.save()
+            
+            
             # Get the full path to the uploaded image
             image_full_path = os.path.join(fs.location, image_path)
 
@@ -34,10 +49,6 @@ def image_upload_view(request, pk):
 
             # Get the IDs of labels associated with the category_label
             class_ids = list(category_label.label_ids.values_list('label_id', flat=True))
-            
-            # Increment the use count for the current model
-            model_use_count[object_detection_model.title] += 1
-            print(model_use_count)
 
             # Perform object detection using the loaded model and class IDs
             results = yolo_model(image_full_path, classes=class_ids)
@@ -64,12 +75,11 @@ def image_upload_view(request, pk):
                 'annotated_image_url': annotated_image_url,
                 'selected_detector': object_detection_model,
                 'form': form,
-                'model_use_count': dict(model_use_count)  # Convert defaultdict to a regular dictionary
             }
             return render(request, 'models/upload.html', context)
 
     # If the request is not a POST, render the form and pass the selected detector and model use count
-    return render(request, 'models/upload.html', {'form': ImageUploadForm(), 'selected_detector': object_detection_model, 'model_use_count': dict(model_use_count)})
+    return render(request, 'models/upload.html', {'form': ImageUploadForm(), 'selected_detector': object_detection_model})
 
 
 
