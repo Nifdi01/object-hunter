@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Profile
 from django.contrib import messages
+from django.forms import ModelForm
 from models.models import ObjectDetectionModel
 
 def landing_page(request):

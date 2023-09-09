@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load yolo_filters %}
+{% load tailwind_filters %}
+{% load static %}
+
+{% block title %}
+upload
+{% endblock title %}
+
+{% block content %}
+<!-- <h2>Selected Model: {{ selected_detector.title }}</h2>
+
+    {% if annotated_image_url %}
+        <h2>Annotated Image:</h2>
+        <img src="{{ annotated_image_url }}" alt="Annotated Image" style="max-width: 100%;">
+    {% endif %}
+
+    <form action="{% url 'image_upload' selected_detector.pk %}" method="post" enctype="multipart/form-data" class="mt-6">
+        {% csrf_token %}
+        
+        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Upload Image</button>
+    </form> -->
+
+
+<section class="text-gray-600 body-font">
+    <h1 class="title-font sm:text-4xl text-3xl font-medium text-gray-900 text-center">{{ selected_detector.title }}</h1>
+    <hr class="w-40 h-1 mx-auto my-4 bg-indigo-500 border-0 rounded md:my-4">
+    <div class="container mx-auto flex flex-col px-5 py-10 justify-center items-center">
+        {% if not annotated_image_url %}
+        <img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-contain object-center rounded border-2 p-2" alt="hero" src="{% static 'vector_images/obd_person_dog.svg' %}">
+        {% else %}
+        <img class="lg:w-2/6 md:w-2/6 w-3/6 mb-10 object-contain object-center rounded border-2 p-2" alt="hero" src="{{ annotated_image_url }}">
+        {% endif %}
+        <div class="w-full md:w-2/3 flex flex-col mb-16 items-center text-center">
+            <div class="flex w-full justify-center items-end">
+                <div class="w-full">
+                    <form action="{% url 'image_upload' selected_detector.pk %}" method="post" enctype="multipart/form-data" class="flex lg:w-2/4 md:w-full w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-8 items-center">
+                        {% csrf_token %}
+                        <div class="relative flex-grow w-full">
+                            {{form.image|add_tailwind_classes:"w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 px-3 transition-colors duration-200 ease-in-out"}}
+                          </div>
+                        <input type="submit" class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" value="Upload">
+                    </form>
+                </div>                
+            </div>
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base py-4">Go back to <a href="{% url 'model_list' %}" class="text-blue-600 hover:text-blue-400">model zoo</a></p>
+        </div>
+    </div>
+</section>
+{% endblock content %}
