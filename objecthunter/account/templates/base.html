@@ -4,12 +4,12 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
-    <title>{% block title %}{% endblock title %}</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>{% block title %}{% endblock title %}</title>
 </head>
 
 <body>
@@ -36,30 +36,27 @@
       </a>
       {% else %}
       <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-        <div id="avatarButton" type="button" data-dropdown-toggle="userDropdown"
-        data-dropdown-placement="bottom-start" class=" cursor-pointer flex items-center">
+        <div id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start"
+          class=" cursor-pointer flex items-center">
           <span class="text-lg hover:text-black font-semibold mr-3">{{ request.user.username }}</span>
-          <img src="{{ request.user.profile.photo.url }}" alt="User Photo"
-            class="w-8 h-8 rounded-full mr-4">
+          <img src="{{ request.user.profile.photo.url }}" alt="User Photo" class="w-8 h-8 rounded-full mr-4">
         </div>
-        <div id="userDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-44 border border-slate-100">
+        <div id="userDropdown"
+          class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-44 border border-slate-100">
           <div class="px-4 py-3 text-sm text-gray-900">
             <div>{{request.user.username}}</div>
             <div class="font-medium truncate">{{request.user.email}}</div>
           </div>
           <ul class="py-2 text-sm text-gray-700" aria-labelledby="avatarButton">
             <li>
-              <a href="#"
-                class="block px-4 py-2 hover:bg-gray-100">Dashboard</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Dashboard</a>
             </li>
             <li>
-              <a href="#"
-                class="block px-4 py-2 hover:bg-gray-100">Settings</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Settings</a>
             </li>
           </ul>
           <div class="py-1">
-            <a href="{% url 'logout' %}"
-              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
+            <a href="{% url 'logout' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
               out</a>
           </div>
         </div>
@@ -74,85 +71,89 @@
       {% endif %}
     </div>
   </header>
-    {% block content %}
-    {% endblock content %}
+  {% block content %}
+  {% endblock content %}
 
-    <footer class="text-gray-600 body-font bg-gray-100 mt-24">
-        <div class="container px-5 mt-6 py-10 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
-          <div class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left md:mt-0 mt-10">
-            <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-              </svg>
-              <span class="ml-3 text-xl">Object Hunter</span>
-            </a>
-            <p class="mt-2 text-sm text-gray-500">Powered by Django and PyTorch</p>
-          </div>
-          <div class="flex-grow flex flex-wrap md:pr-20 -mb-10 md:text-left text-center order-first">
-            <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">Contact</h2>
-              <nav class="list-none mb-10">
-                <li>
-                  <a href="https://github.com/Nifdi01" class="text-gray-600 hover:text-gray-800">Github</a>
-                </li>
-                <li>
-                  <a href="https://www.linkedin.com/in/nifdi-guliyev/" class="text-gray-600 hover:text-gray-800">Linkedin</a>
-                </li>
-                <li>
-                  <a class="text-gray-600 hover:text-gray-800">+49 69 1234 5678</a>
-                </li>
-                <li>
-                  <a href='mailto:nifdiguliyev@gmail.com' class="text-gray-600 hover:text-gray-800">nifdiguliyev@gmail.com</a>
-                </li>
-              </nav>
-            </div>
-            <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">Docs</h2>
-              <nav class="list-none mb-10">
-                <li>
-                  <a class="text-gray-600 hover:text-gray-800">YOLOv1</a>
-                </li>
-                <li>
-                  <a class="text-gray-600 hover:text-gray-800">YOLOv3</a>
-                </li>
-                <li>
-                  <a class="text-gray-600 hover:text-gray-800">Datasets</a>
-                </li>
-              </nav>
-            </div>
-            <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">Offices</h2>
-              <nav class="list-none mb-10">
-                <li>
-                  <a class="text-gray-600 hover:text-gray-800">Berlin</a>
-                </li>
-                <li>
-                  <a class="text-gray-600 hover:text-gray-800">Washington DC</a>
-                </li>
-                <li>
-                  <a class="text-gray-600 hover:text-gray-800">Oslo</a>
-                </li>
-                <li>
-                  <a class="text-gray-600 hover:text-gray-800">Tokyo</a>
-                </li>
-              </nav>
-            </div>
-            <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">Additional</h2>
-              <nav class="list-none mb-10">
-                <li>
-                  <a class="text-gray-600 hover:text-gray-800">Copyright</a>
-                </li>
-                <li>
-                  <a class="text-gray-600 hover:text-gray-800">Terms and Conditions</a>
-                </li>
-                <li>
-                  <a class="text-gray-600 hover:text-gray-800">FAQs</a>
-                </li>
-              </nav>
-            </div>
-          </div>
+  <footer class="text-gray-600 body-font bg-gray-100 mt-24">
+    <div
+      class="container px-5 mt-6 py-10 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
+      <div class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left md:mt-0 mt-10">
+        <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
+            stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
+            viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+          </svg>
+          <span class="ml-3 text-xl">Object Hunter</span>
+        </a>
+        <p class="mt-2 text-sm text-gray-500">Powered by Django and PyTorch</p>
+      </div>
+      <div class="flex-grow flex flex-wrap md:pr-20 -mb-10 md:text-left text-center order-first">
+        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+          <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">Contact</h2>
+          <nav class="list-none mb-10">
+            <li>
+              <a class="text-gray-600 hover:text-gray-800">Github</a>
+            </li>
+            <li>
+              <a class="text-gray-600 hover:text-gray-800">Linkedin</a>
+            </li>
+            <li>
+              <a class="text-gray-600 hover:text-gray-800">+49 69 1234 5678</a>
+            </li>
+            <li>
+              <a class="text-gray-600 hover:text-gray-800">nifdiguliyev@gmail.com</a>
+            </li>
+          </nav>
         </div>
-      </footer>
+        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+          <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">Docs</h2>
+          <nav class="list-none mb-10">
+            <li>
+              <a class="text-gray-600 hover:text-gray-800">YOLOv1</a>
+            </li>
+            <li>
+              <a class="text-gray-600 hover:text-gray-800">YOLOv3</a>
+            </li>
+            <li>
+              <a class="text-gray-600 hover:text-gray-800">Datasets</a>
+            </li>
+          </nav>
+        </div>
+        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+          <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">Offices</h2>
+          <nav class="list-none mb-10">
+            <li>
+              <a class="text-gray-600 hover:text-gray-800">Berlin</a>
+            </li>
+            <li>
+              <a class="text-gray-600 hover:text-gray-800">Washington DC</a>
+            </li>
+            <li>
+              <a class="text-gray-600 hover:text-gray-800">Oslo</a>
+            </li>
+            <li>
+              <a class="text-gray-600 hover:text-gray-800">Tokyo</a>
+            </li>
+          </nav>
+        </div>
+        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+          <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">Additional</h2>
+          <nav class="list-none mb-10">
+            <li>
+              <a class="text-gray-600 hover:text-gray-800">Copyright</a>
+            </li>
+            <li>
+              <a class="text-gray-600 hover:text-gray-800">Terms and Conditions</a>
+            </li>
+            <li>
+              <a class="text-gray-600 hover:text-gray-800">FAQs</a>
+            </li>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </footer>
 </body>
+
 </html>
