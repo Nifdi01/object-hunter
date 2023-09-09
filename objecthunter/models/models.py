@@ -1,6 +1,8 @@
 from django.db import models
 import os
 from ultralytics import YOLO
+from django.contrib.auth.models import User
+
 
 class Image(models.Model):
     image = models.ImageField(upload_to='images', blank=True)
@@ -27,3 +29,12 @@ class ObjectDetectionModel(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class ModelUseCount(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    model = models.ForeignKey(ObjectDetectionModel, on_delete=models.CASCADE)
+    count = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return f'{self.user.username} - {self.model.title} - {self.count} uses'

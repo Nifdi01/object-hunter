@@ -6,8 +6,9 @@ from ultralytics import YOLO
 from PIL import Image
 from django.conf import settings
 from .forms import ImageUploadForm
-from .models import ObjectDetectionModel
-
+from .models import ObjectDetectionModel, CategoryLabel
+from collections import defaultdict
+from account.models import Profile
 
 def image_upload_view(request, pk):
     object_detection_model = get_object_or_404(ObjectDetectionModel, pk=pk)
@@ -19,25 +20,38 @@ def image_upload_view(request, pk):
             uploaded_image = form.cleaned_data['image']
             fs = FileSystemStorage()
             image_path = fs.save(uploaded_image.name, uploaded_image)
+            
+            # Increment the usage for the model
+            user_profile = request.user.profile
+            model_use_count = user_profile.model_use_count
 
+            # Get the name of the model associated with the ID
+            model_name = object_detection_model.title  # Assuming "title" is the field containing the model name
+
+            # Check if the model name exists in the model_use_count dictionary
+            if model_name in model_use_count:
+                model_use_count[model_name] += 1
+            else:
+                model_use_count[model_name] = 1
+
+            # Save the updated use count back to the user's profile
+            user_profile.save()
+            
+            
             # Get the full path to the uploaded image
             image_full_path = os.path.join(fs.location, image_path)
 
             # Load the YOLO model associated with the selected detector
             yolo_model = YOLO(os.path.join(settings.MEDIA_ROOT, 'yolov8n.pt'))
 
-
             # Get the related CategoryLabel instance associated with the ObjectDetectionModel
             category_label = object_detection_model.category_label
 
             # Get the IDs of labels associated with the category_label
             class_ids = list(category_label.label_ids.values_list('label_id', flat=True))
-            print(class_ids)
 
             # Perform object detection using the loaded model and class IDs
             results = yolo_model(image_full_path, classes=class_ids)
-
-
 
             # Process the results and save the annotated image
             for r in results:
@@ -60,11 +74,11 @@ def image_upload_view(request, pk):
                 'image': uploaded_image,
                 'annotated_image_url': annotated_image_url,
                 'selected_detector': object_detection_model,
-                'form': form
+                'form': form,
             }
             return render(request, 'models/upload.html', context)
 
-    # If the request is not a POST, render the form and pass the selected detector
+    # If the request is not a POST, render the form and pass the selected detector and model use count
     return render(request, 'models/upload.html', {'form': ImageUploadForm(), 'selected_detector': object_detection_model})
 
 

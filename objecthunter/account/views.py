@@ -4,14 +4,32 @@ from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditFor
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Profile
+from models.models import ModelUseCount, ObjectDetectionModel
 from django.contrib import messages
-from django.forms import ModelForm
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
+from .models import Profile
+from .serializers import ProfileSerializer
 
+
+class ModelUseCountAPI(generics.RetrieveAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    permission_classes = [IsAuthenticated]
+    
+    def get_object(self):
+        return self.request.user.profile
 
 
 
 def landing_page(request):
     return render(request, 'account/landing_page.html')
+
+
+@login_required
+def user_dashboard(request):
+    return render(request, 'account/dashboard.html')
+
 
 
 def user_login(request):
