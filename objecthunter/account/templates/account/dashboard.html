@@ -6,9 +6,6 @@ dashboard
 
 {% block content %}
 
-
-
-
 <div class='md:ml-auto flex flex-wrap items-stretch text-base justify-center gap-10'>
     <div class="max-w-sm w-full bg-white rounded-lg shadow p-4 md:p-6 m-10 flex flex-col">
         <div class="flex flex-col items-center pb-10 pt-5">
@@ -73,8 +70,8 @@ dashboard
                         <div data-popper-arrow></div>
                     </div>
                 </div>
-                <div id="dateRangeDropdown"
-                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-80 lg:w-96">
+                {% if series %}
+                <div id="dateRangeDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-80 lg:w-96">
                     <div class="p-3" aria-labelledby="dateRangeButton">
                         <div date-rangepicker datepicker-autohide class="flex items-center">
                             <div class="relative">
@@ -105,8 +102,14 @@ dashboard
                         </div>
                     </div>
                 </div>
+                {% else %}
+                    <h3 class="text-center text-xl text-gray-500 font-semibold">No data yet</h3>
+                {% endif %}
             </div>
         </div>
+        
+        
+        
         <!-- Line Chart -->
         <div class="py-6" id="pie-chart"></div>
     </div>
