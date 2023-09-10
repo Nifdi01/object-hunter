@@ -77,12 +77,19 @@ WSGI_APPLICATION = "objecthunter.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# Determine the database file name
+if os.path.exists(os.path.join(BASE_DIR, 'db.sqlite3_debugger')):
+    db_name = 'db.sqlite3_debugger'
+else:
+    db_name = 'db.sqlite3'
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": os.path.join(BASE_DIR, db_name),
     }
 }
+
 
 
 # Password validation
