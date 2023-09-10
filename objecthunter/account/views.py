@@ -10,6 +10,12 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from .models import Profile
 from .serializers import ProfileSerializer
+from django.http import JsonResponse
+
+
+#############
+# API VIEWS #
+#############
 
 
 class ModelUseCountAPI(generics.RetrieveAPIView):
@@ -22,13 +28,31 @@ class ModelUseCountAPI(generics.RetrieveAPIView):
 
 
 
+##################
+# STANDARD VIEWS #
+##################
+
+
 def landing_page(request):
     return render(request, 'account/landing_page.html')
 
 
 @login_required
 def user_dashboard(request):
-    return render(request, 'account/dashboard.html')
+    user_profile = request.user.profile
+    model_use_count = user_profile.model_use_count
+
+    # Extract labels and series from the JSON data
+    labels = list(model_use_count.keys())
+    series = list(model_use_count.values())
+    
+    # Calculate the most used model
+    fav_model = sorted(model_use_count.items(), key=lambda x:x[1])[-1][0]
+
+    # Pass the data to the template
+    context = {'labels': labels, 'series': series, 'fav_model': fav_model}
+
+    return render(request, 'account/dashboard.html', context)
 
 
 
