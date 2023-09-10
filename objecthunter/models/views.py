@@ -26,7 +26,7 @@ def image_upload_view(request, pk):
             model_use_count = user_profile.model_use_count
 
             # Get the name of the model associated with the ID
-            model_name = object_detection_model.title  # Assuming "title" is the field containing the model name
+            model_name = object_detection_model.title.split('Detector')[0]  # Assuming "title" is the field containing the model name
 
             # Check if the model name exists in the model_use_count dictionary
             if model_name in model_use_count:
