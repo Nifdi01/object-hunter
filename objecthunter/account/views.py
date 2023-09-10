@@ -37,8 +37,6 @@ def landing_page(request):
     return render(request, 'account/landing_page.html')
 
 
-
-
 @login_required
 def user_dashboard(request):
     user_profile = request.user.profile
@@ -47,15 +45,14 @@ def user_dashboard(request):
     # Extract labels and series from the JSON data
     labels = list(model_use_count.keys())
     series = list(model_use_count.values())
+    
+    # Calculate the most used model
+    fav_model = sorted(model_use_count.items(), key=lambda x:x[1])[-1][0]
 
     # Pass the data to the template
-    context = {'labels': labels, 'series': series}
+    context = {'labels': labels, 'series': series, 'fav_model': fav_model}
 
     return render(request, 'account/dashboard.html', context)
-
-
-
-
 
 
 
