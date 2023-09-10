@@ -6,6 +6,7 @@ colorama==0.4.6
 contourpy==1.1.0
 cycler==0.11.0
 Django==4.2.4
+djangorestframework==3.14.0
 filelock==3.9.0
 fonttools==4.42.1
 idna==3.4
@@ -36,9 +37,9 @@ seaborn==0.12.2
 six==1.16.0
 sqlparse==0.4.4
 sympy==1.11.1
-torch==2.0.1
-torchaudio==2.0.2
-torchvision==0.15.2
+torch==2.0.1+cu118
+torchaudio==2.0.2+cu118
+torchvision==0.15.2+cu118
 tqdm==4.66.1
 typing_extensions==4.7.1
 tzdata==2023.3

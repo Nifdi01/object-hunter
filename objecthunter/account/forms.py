@@ -9,11 +9,14 @@ class LoginForm(forms.Form):
 class ProfileRegistrationForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['photo']
+        fields = ['photo', 'gender', 'age']
     
     def __init__(self, *args, **kwargs):
-        super().__init__(self, *args, **kwargs)
-        self.fields['photo'].widget.attrs['class'] = "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+        super().__init__(*args, **kwargs)  # Corrected the call to super()
+        self.fields['photo'].widget.attrs['class'] = "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+        self.fields['gender'].widget.attrs['class'] = "block p-1 w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+        self.fields['age'].widget.attrs['class'] = "block p-1 w-20 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+
 
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput, label='Password')
@@ -21,7 +24,7 @@ class UserRegistrationForm(forms.ModelForm):
     
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'email']
+        fields = ['username', 'first_name', 'last_name', 'email']
         
     def clean_password_repeat(self):
         cd = self.cleaned_data

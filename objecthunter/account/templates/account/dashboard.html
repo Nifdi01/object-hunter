@@ -13,19 +13,38 @@ dashboard
     <div class="max-w-sm w-full bg-white rounded-lg shadow p-4 md:p-6 m-10 flex flex-col">
         <div class="flex flex-col items-center pb-10 pt-5">
             <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{{request.user.profile.photo.url}}" alt="Bonnie image"/>
-            <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-black">{{request.user.username}}</h5>
-            <span class="text-sm text-gray-500 dark:text-gray-400">{{request.user.email}}</span>
+            <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-black">{{request.user.first_name}} {{request.user.last_name}}</h5>
+            <span class="text-sm text-gray-700">@{{request.user.username}}</span>
+            <span class="text-sm text-gray-500">{{request.user.email}}</span>
             <hr class="h-px w-48 my-8 mb-2 bg-gray-300 border-0">
             <div class='w-48'>
-                <p class='text-left mb-1 text-gray-900 dark:text-black'>Gender: {{request.user.gender}}</p>
+                <div class="text-gray-900 dark:text-black">
+                    <p class="mb-1">
+                        <span class="float-left">Gender:</span>
+                        <span class="float-right">{{ request.user.profile.gender }}</span>
+                    </p>
+                    <div class="clearfix"></div>
+                </div>
             </div>
             <hr class="h-px w-48 my-2 mb-1 bg-gray-300 border-0">
             <div class='w-48'>
-                <p class='text-left mb-1 text-gray-900 dark:text-black'>Age: {{request.user.age}}</p>
+                <div class="text-gray-900 dark:text-black">
+                    <p class="mb-1">
+                        <span class="float-left">Age:</span>
+                        <span class="float-right">{{ request.user.profile.age }}</span>
+                    </p>
+                    <div class="clearfix"></div>
+                </div>
             </div>
             <hr class="h-px w-48 my-2 mb-1 bg-gray-300 border-0">
             <div class='w-48'>
-                <p class='text-left mb-1 text-gray-900 dark:text-black'>Fav detector: {{fav_model}}</p>
+                <div class="text-gray-900 dark:text-black">
+                    <p class="mb-1">
+                        <span class="float-left">Favourite Model:</span>
+                        <span class="float-right">{{ fav_model|truncatewords:1 }}</span>
+                    </p>
+                    <div class="clearfix"></div>
+                </div>
             </div>
             <hr class="h-px w-48 my-2 bg-gray-300 border-0">
         </div>
@@ -48,7 +67,7 @@ dashboard
                             <h3 class="font-semibold text-gray-900">Usage</h3>
                             <p>This simple Pie Chart will give you insights on which models you have used the most</p>
                             <h3 class="font-semibold text-gray-900">Calculation</h3>
-                            <p>The chart simply increment the the usage in regard to the model and return the portion in
+                            <p>The chart simply increments the the usage in regards to the model and returns the portion in
                                 percentage</p>
                         </div>
                         <div data-popper-arrow></div>
@@ -98,7 +117,7 @@ dashboard
             const getChartOptions = () => {
                 return {
                     series: {{ series | safe }},
-                colors: ["#1D2F6F", "#8390FA", "#FAC748", "#804992", "#F88DAD"],
+                colors: ["#1D2F6F", "#8390FA", "#FAC748", "#804992", "#F88DAD", "#E3DE8F"],
                 chart: {
                     height: 420,
                     width: "100%",
