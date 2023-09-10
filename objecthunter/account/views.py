@@ -47,10 +47,13 @@ def user_dashboard(request):
     series = list(model_use_count.values())
     
     # Calculate the most used model
-    fav_model = sorted(model_use_count.items(), key=lambda x:x[1])[-1][0]
+    if len(model_use_count.items()) != 0:
+        fav_model = sorted(model_use_count.items(), key=lambda x:x[1])[-1][0]
+    else:
+        fav_model = 'None'
 
     # Pass the data to the template
-    context = {'labels': labels, 'series': series, 'fav_model': fav_model}
+    context = {'section': 'dashboard', 'labels': labels, 'series': series, 'fav_model': fav_model}
 
     return render(request, 'account/dashboard.html', context)
 
@@ -77,11 +80,6 @@ def user_login(request):
     return render(request, 'account/login.html', {'form': form})
 
 
-@login_required
-def dashboard(request):
-    return render(request,
-                  'account/dashboard.html',
-                  {'section': 'dashboard'})
 
 
 def register(request):
@@ -95,17 +93,13 @@ def register(request):
             profile = profile_form.save(commit=False)
             profile.user = new_user
             profile.save()
-            return render(request,
-                          'account/register_done.html',
-                          {'new_user': new_user})
-        
+            return render(request, 'account/register_done.html', {'new_user': new_user})
     else:
         user_form = UserRegistrationForm()
-        profile_form = ProfileRegistrationForm()
+        profile_form = ProfileRegistrationForm()  # Correctly initialize the ProfileRegistrationForm here
     
-    return render(request,
-                    'account/register.html',
-                    {'user_form': user_form, 'profile_form':profile_form})
+    return render(request, 'account/register.html', {'user_form': user_form, 'profile_form': profile_form})
+
 
 
 @login_required
