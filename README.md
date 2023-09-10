@@ -30,3 +30,4 @@ Object Hunter is built using the following technologies:
 - PyTorch: Utilized for object detection using YOLOv8 nano.
 - Tailwind CSS: Enhances the visual design and user experience.
 - HTML: Used for structuring the web pages and user interface.
+- JavaScript for functional dashboard
