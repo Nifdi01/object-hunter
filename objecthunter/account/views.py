@@ -103,7 +103,7 @@ def register(request):
 
 
 @login_required
-def edit(request):
+def settings(request):
     if request.method == 'POST':
         user_form = UserEditForm(instance=request.user,
                                  data=request.POST)
@@ -114,8 +114,9 @@ def edit(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, 'Profile updated '\
-                                      'successfully')
+            
+            return render(request, 'account/landing_page.html')
+            
         else:
             messages.error(request, 'Error updating your profile')
     else:
@@ -123,6 +124,6 @@ def edit(request):
         profile_form = ProfileEditForm(
                                     instance=request.user.profile)
     return render(request,
-                  'account/edit.html',
+                  'account/settings.html',
                   {'user_form': user_form,
                    'profile_form': profile_form})
