@@ -103,7 +103,7 @@ def register(request):
 
 
 @login_required
-def edit(request):
+def settings(request):
     if request.method == 'POST':
         user_form = UserEditForm(instance=request.user,
                                  data=request.POST)
@@ -123,6 +123,6 @@ def edit(request):
         profile_form = ProfileEditForm(
                                     instance=request.user.profile)
     return render(request,
-                  'account/edit.html',
+                  'account/settings.html',
                   {'user_form': user_form,
                    'profile_form': profile_form})

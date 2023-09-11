@@ -34,9 +34,11 @@ class UserRegistrationForm(forms.ModelForm):
     
 
 class UserEditForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput, label='Password')
+    password_repeat = forms.CharField(widget=forms.PasswordInput, label='Repeat Password')
     class Meta:
         model = User
-        fields = ['first_name', 'last_name','email']
+        fields = ['username', 'first_name', 'last_name', 'email']
         
     def clean_email(self):
         target = self.cleaned_data
@@ -48,5 +50,12 @@ class UserEditForm(forms.ModelForm):
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['photo']
+        fields = ['gender', 'age']
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)  # Corrected the call to super()
+        # self.fields['photo'].widget.attrs['class'] = "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+        self.fields['gender'].widget.attrs['class'] = "block p-1 w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+        self.fields['age'].widget.attrs['class'] = "block p-1 w-20 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+
     
