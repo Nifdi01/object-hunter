@@ -41,8 +41,8 @@ class UserEditForm(forms.ModelForm):
         fields = ['username', 'first_name', 'last_name', 'email']
         
     def clean_email(self):
-        target = self.cleaned_data
-        if User.object.exclude(id=self.instance.id).filter(email=target).exists():
+        target = self.cleaned_data.get('email')
+        if User.objects.exclude(id=self.instance.id).filter(email=target).exists():
             raise forms.ValidationError('Email Already in use!')
         return target
     
@@ -50,11 +50,11 @@ class UserEditForm(forms.ModelForm):
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['gender', 'age']
+        fields = ['photo', 'gender', 'age']
         
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)  # Corrected the call to super()
-        # self.fields['photo'].widget.attrs['class'] = "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+        self.fields['photo'].widget.attrs['class'] = "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
         self.fields['gender'].widget.attrs['class'] = "block p-1 w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
         self.fields['age'].widget.attrs['class'] = "block p-1 w-20 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
 

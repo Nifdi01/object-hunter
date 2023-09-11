@@ -114,8 +114,9 @@ def settings(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, 'Profile updated '\
-                                      'successfully')
+            
+            return render(request, 'account/landing_page.html')
+            
         else:
             messages.error(request, 'Error updating your profile')
     else:

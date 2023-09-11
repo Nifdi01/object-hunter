@@ -18,7 +18,7 @@
         </div>
     {% endif %}
     <div class="container px-5 py-20 mx-auto flex flex-wrap items-center justify-center"> <!-- Added justify-center -->
-        <form action="{% url 'settings' %}" method="post" class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col w-full mt-10 md:mt-0">
+        <form method="post" class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col w-full mt-10 md:mt-0" enctype="multipart/form-data">
             {% csrf_token %}
                 <img class="group w-20 h-20 rounded-full mx-auto outline outline-3 outline-gray-200 outline-offset-8" src="{{request.user.profile.photo.url}}" alt="Rounded avatar">                                
             <div class="relative my-4">
@@ -55,7 +55,11 @@
                 <label for="{{user_form.age.id_for_label}}" class="leading-7 text-sm text-gray-600">Age</label>
                 {{ profile_form.age }}
             </div>
-            <input type="submit" value="Create my account" class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"></button>
+            <div class="relative mb-4">
+                <label for="{{ profile_form.photo.id_for_label }}" class="leading-7 text-sm text-gray-600">Photo</label>
+                <input type="file" name="photo" accept="image/*" id="{{ profile_form.photo.id_for_label }}" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none">
+            </div>
+            <input type="submit" value="Save Changes" class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"></button>
         </form>
     </div>
 </section>
